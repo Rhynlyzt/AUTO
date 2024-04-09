@@ -25,28 +25,28 @@ module.exports.run = async function({
       let page = 1;
       let start = (page - 1) * pages;
       let end = start + pages;
-      let helpMessage = `Command List:\n\n`;
+      let helpMessage = `˖ ࣪ ᪥ 𝐌𝐘 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐋𝐈𝐒𝐓𐀔 𓂃:\n\n`;
       for (let i = start; i < Math.min(end, commands.length); i++) {
-        helpMessage += `\t${i + 1}. 「 ${prefix}${commands[i]} 」\n`;
+        helpMessage += `\t${i + 1}. ✩ ♬ ₊.  ${prefix}${commands[i]} \n`;
       }
-      helpMessage += '\nEvent List:\n\n';
+      helpMessage += '\n𐀔 𝐓𝐇𝐄 𝐄𝐕𝐄𝐍𝐓 𝐋𝐈𝐒𝐓✩ ♬ ₊:\n\n';
       eventCommands.forEach((eventCommand, index) => {
-        helpMessage += `\t${index + 1}. 「 ${prefix}${eventCommand} 」\n`;
+        helpMessage += `\t${index + 1}. ✩ ♬ ₊ ${prefix}${eventCommand} ⋆☾⋆⁺₊✧\n`;
       });
-      helpMessage += `\nPage ${page}/${Math.ceil(commands.length / pages)}. To view the next page, type '${prefix}help page number'. To view information about a specific command, type '${prefix}help command name'.`;
+      helpMessage += `\nPage ${page}/${Math.ceil(commands.length / pages)}. 𝐓𝐎 𝐕𝐈𝐄𝐖 𝐓𝐇𝐄 𝐍𝐄𝐗𝐓 𝐏𝐀𝐆𝐄, 𝐓𝐘𝐏𝐄 '${prefix}𝐇𝐄𝐋𝐏 𝐏𝐀𝐆𝐄 𝐍𝐔𝐌𝐁𝐄𝐑'. 𝐓𝐎 𝐕𝐈𝐄𝐖 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 𝐀𝐁𝐎𝐔𝐓 𝐀 𝐒𝐏𝐄𝐂𝐈𝐅𝐈𝐂 𝐂𝐎𝐌𝐌𝐀𝐍𝐃, 𝐓𝐘𝐏E. '${prefix}𝐇𝐄𝐋𝐏 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐍𝐀𝐌E'.`;
       api.sendMessage(helpMessage, event.threadID, event.messageID);
     } else if (!isNaN(input)) {
       const page = parseInt(input);
       const pages = 20;
       let start = (page - 1) * pages;
       let end = start + pages;
-      let helpMessage = `Command List:\n\n`;
+      let helpMessage = `✩ ♬ ₊𝐌𝐘 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐋𝐈𝐒𝐓⋆☾⋆⁺₊✧:\n\n`;
       for (let i = start; i < Math.min(end, commands.length); i++) {
         helpMessage += `\t${i + 1}. 「 ${prefix}${commands[i]} 」\n`;
       }
-      helpMessage += '\nEvent List:\n\n';
+      helpMessage += '\𐀔 𓂃n𝐓𝐇𝐄 𝐄𝐕𝐄𝐍𝐓 𝐋𝐈𝐒𝐓:\n\n';
       eventCommands.forEach((eventCommand, index) => {
-        helpMessage += `\t${index + 1}. 「 ${prefix}${eventCommand} 」\n`;
+        helpMessage += `\t${index + 1}. 𐀔 𓂃 ${prefix}${eventCommand} 」\n`;
       });
       helpMessage += `\nPage ${page} of ${Math.ceil(commands.length / pages)}`;
       api.sendMessage(helpMessage, event.threadID, event.messageID);
