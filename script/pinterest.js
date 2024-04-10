@@ -1,81 +1,60 @@
 const axios = require('axios');
-const fs = require('fs');
-const cheerio = require('cheerio');
+const fs = require("fs");
+
 module.exports.config = {
-  name: "pinterest",
-  version: "1.0.0",
-  role: 0,
-  hasPrefix: true,
-  description: "Search for images on Pinterest.",
-  usages: "pinterest [query] - [amount]",
-  credits: "Developer",
+  name: "pin",
+  version: "1.4",
+  hasPermission: 0,
+  credits: "Hazeyy",
+  description: "( 𝙿𝚒𝚗𝚝𝚎𝚛𝚎𝚜𝚝 )",
+  commandCategory: "𝚗𝚘 𝚙𝚛𝚎𝚏𝚒𝚡",
+  usages: "( 𝚂𝚎𝚊𝚛𝚌𝚑 𝙸𝚖𝚊𝚐𝚎𝚜 𝚘𝚗 𝙿𝚒𝚗𝚝𝚎𝚛𝚎𝚜𝚝 )",
 };
-async function getPinterest(img) {
-  try {
-    const {
-      data
-    } = await axios.get("https://id.pinterest.com/search/pins/?autologin=true&q=" + img, {
-      headers: {
-        cookie: "_auth=1; _b=\"AVna7S1p7l1C5I9u0+nR3YzijpvXOPc6d09SyCzO+DcwpersQH36SmGiYfymBKhZcGg=\"; _pinterest_sess=TWc9PSZHamJOZ0JobUFiSEpSN3Z4a2NsMk9wZ3gxL1NSc2k2NkFLaUw5bVY5cXR5alZHR0gxY2h2MVZDZlNQalNpUUJFRVR5L3NlYy9JZkthekp3bHo5bXFuaFZzVHJFMnkrR3lTbm56U3YvQXBBTW96VUgzVUhuK1Z4VURGKzczUi9hNHdDeTJ5Y2pBTmxhc2owZ2hkSGlDemtUSnYvVXh5dDNkaDN3TjZCTk8ycTdHRHVsOFg2b2NQWCtpOWxqeDNjNkk3cS85MkhhSklSb0hwTnZvZVFyZmJEUllwbG9UVnpCYVNTRzZxOXNJcmduOVc4aURtM3NtRFo3STlmWjJvSjlWTU5ITzg0VUg1NGhOTEZzME9SNFNhVWJRWjRJK3pGMFA4Q3UvcHBnWHdaYXZpa2FUNkx6Z3RNQjEzTFJEOHZoaHRvazc1c1UrYlRuUmdKcDg3ZEY4cjNtZlBLRTRBZjNYK0lPTXZJTzQ5dU8ybDdVS015bWJKT0tjTWYyRlBzclpiamdsNmtpeUZnRjlwVGJXUmdOMXdTUkFHRWloVjBMR0JlTE5YcmhxVHdoNzFHbDZ0YmFHZ1VLQXU1QnpkM1FqUTNMTnhYb3VKeDVGbnhNSkdkNXFSMXQybjRGL3pyZXRLR0ZTc0xHZ0JvbTJCNnAzQzE0cW1WTndIK0trY05HV1gxS09NRktadnFCSDR2YzBoWmRiUGZiWXFQNjcwWmZhaDZQRm1UbzNxc21pV1p5WDlabm1UWGQzanc1SGlrZXB1bDVDWXQvUis3elN2SVFDbm1DSVE5Z0d4YW1sa2hsSkZJb1h0MTFpck5BdDR0d0lZOW1Pa2RDVzNySWpXWmUwOUFhQmFSVUpaOFQ3WlhOQldNMkExeDIvMjZHeXdnNjdMYWdiQUhUSEFBUlhUVTdBMThRRmh1ekJMYWZ2YTJkNlg0cmFCdnU2WEpwcXlPOVZYcGNhNkZDd051S3lGZmo0eHV0ZE42NW8xRm5aRWpoQnNKNnNlSGFad1MzOHNkdWtER0xQTFN5Z3lmRERsZnZWWE5CZEJneVRlMDd2VmNPMjloK0g5eCswZUVJTS9CRkFweHc5RUh6K1JocGN6clc1JmZtL3JhRE1sc0NMTFlpMVErRGtPcllvTGdldz0="
-      },
-    });
-    const $ = cheerio.load(data);
-    const result = [];
-    const image = [];
-    $("div > a").each((_, element) => {
-      const link = $(element).find("img").attr("src");
-      if (link !== undefined) result.push(link);
-    });
-    for (let v of result) {
-      image.push(v.replace(/236/g, "736"));
-    }
-    image.shift();
-    return image;
-  } catch (error) {
-    throw error;
+
+module.exports.handleEvent = async function ({ api, event }) {
+  if (!(event.body.indexOf("pin") === 0 || event.body.indexOf("Pin") === 0)) return;
+  const args = event.body.split(/\s+/);
+  args.shift();
+  let text = args.join(" ");
+  const search = text.split(">")[0].trim();
+  if (!search) {
+    return api.sendMessage("🤖 𝙷𝚎𝚕𝚕𝚘 𝚝𝚘 𝚞𝚜𝚎 𝙿𝚒𝚗𝚝𝚎𝚝𝚎𝚛𝚎𝚜𝚝.\n\n𝙿𝚕𝚎𝚊𝚜𝚎 𝚞𝚜𝚎: 𝙿𝚒𝚗 [ 𝚗𝚊𝚖𝚎 ] - [ 𝚊𝚖𝚘𝚞𝚗𝚝 ] \n\n𝙸𝚏 𝚗𝚘 𝚌𝚘𝚞𝚗𝚝 𝚄𝚜𝚎: 𝙿𝚒𝚗 [ 𝚗𝚊𝚖𝚎 ] 𝚒𝚝 𝚠𝚒𝚕𝚕 𝚐𝚎𝚗𝚎𝚛𝚊𝚝𝚎 5 𝚒𝚖𝚊𝚐𝚎𝚜 𝚠𝚒𝚝𝚑 𝚗𝚘 𝚌𝚘𝚞𝚗𝚝 𝚗𝚎𝚎𝚍𝚎𝚍.", event.threadID);
   }
-}
-module.exports.run = async function({
-  api,
-  event,
-  args,
-  prefix
-}) {
-  const input = args.join(' ');
-  const time = new Date();
-  const timestamp = time.toISOString().replace(/[:.]/g, "-");
-  if (!input) {
-    api.sendMessage(`To get started, type Pinterest followed by the name of the image you are looking for, and the expected number of images.\n\nExample:\n\n${prefix}soyeon - 10`, event.threadID, event.messageID);
+  let count;
+  if (text.includes("-")) {
+    count = text.split("-")[1].trim()
   } else {
-    try {
-      const key = input.substr(0, input.indexOf('-'));
-      api.sendMessage(`Searching for ${key}`, event.threadID, event.messageID);
-      const len = input.split("-").pop() || 6
-      const data = await getPinterest(key);
-      let num = 0;
-      let file = [];
-      for (let i = 0; i < parseInt(len); i++) {
-        const path = `./script/cache/${timestamp}_${i + 1}.jpg`;
-        const download = (await axios.get(`${data[i]}`, {
-          responseType: 'arraybuffer'
-        })).data;
-        fs.writeFileSync(path, Buffer.from(download, 'utf-8'));
-        file.push(fs.createReadStream(path));
+    count = 5;
+  }
+
+  try {
+    const response = await axios.get(`https://code-merge-api-hazeyy01.replit.app/pinterest/api?search=${search}`);
+    api.sendMessage('🕟 | 𝚂𝚎𝚊𝚛𝚌𝚑𝚒𝚗𝚐 𝚘𝚗 𝙿𝚒𝚗𝚝𝚎𝚛𝚎𝚜𝚝, 𝙿𝚕𝚎𝚊𝚜𝚎 𝚠𝚊𝚒𝚝...', event.threadID);
+
+    const data = response.data;
+    if (data.error) {
+      return api.sendMessage(data.error, event.threadID);
+    } else {
+      let attachment = [];
+      let storedPath = [];
+      for (let i = 0; i < data.count; i++) {
+        if (i == count) break;
+        let path = __dirname + "/cache/" + Math.floor(Math.random() * 99999999) + ".jpg";
+        let pic = await axios.get(data.data[i], { responseType: "arraybuffer" });
+        fs.writeFileSync(path, pic.data);
+        storedPath.push(path);
+        attachment.push(fs.createReadStream(path))
       }
-      await api.sendMessage({
-        attachment: file,
-        body: ""
-      }, event.threadID, (err) => {
-        if (err) {
-          return;
-        } else {
-          for (let i = 0; i < parseInt(len); i++) {
-            fs.unlinkSync(`./script/cache/${timestamp}_${i + 1}.jpg`);
-          }
+      api.sendMessage({ body: `🤖 𝐏𝐢𝐧𝐭𝐞𝐫𝐞𝐬𝐭 ( 𝐀𝐈 )\n\n🖋️ 𝐒𝐞𝐚𝐫𝐜𝐡: '${search}'\n\n» 𝙽𝚞𝚖𝚋𝚎𝚛: ${attachment.length} - ${data.count} «`, attachment: attachment }, event.threadID, () => {
+        for (const item of storedPath) {
+          fs.unlinkSync(item)
         }
       }, event.messageID);
-    } catch (error) {
-      console.log(error);
     }
+  } catch (error) {
+    console.error(error);
+    return api.sendMessage("🚫 𝙰𝚗 𝚎𝚛𝚛𝚘𝚛 𝚘𝚌𝚌𝚞𝚛𝚎𝚍 𝚠𝚑𝚒𝚕𝚎 𝚏𝚎𝚝𝚌𝚑𝚒𝚗𝚐 𝚍𝚊𝚝𝚊 𝚏𝚛𝚘𝚖 𝙿𝚒𝚗𝚝𝚎𝚛𝚎𝚜𝚝 API.", event.threadID);
   }
-}
+};
+
+module.exports.run = async function ({ api, event }) {};
