@@ -17,11 +17,11 @@ module.exports.run = async function ({ api, event, args }) {
   try {
     const q = args.join(" ");
     if (!q) {
-      api.sendMessage(`Please provide a URL from facebook.com`, event.threadID, event.messageID);
+      api.sendMessage(`𝙿𝙻𝙴𝙰𝚂𝙴 𝙿𝚁𝙾𝚅𝙸𝙳𝙴 𝙰 𝚄𝚁𝙻 𝙵𝚁𝙾𝙼 𝙵𝙰𝙲𝙴𝙱𝙾𝙾𝙺.𝙲𝙾𝙼`, event.threadID, event.messageID);
       return;
     }
 
-    api.sendMessage(`Processing...`, event.threadID, event.messageID);
+    api.sendMessage(`🕗 𝙿𝚁𝙾𝙲𝙴𝚂𝚂𝙸𝙽𝙶 𝙿𝙻𝙴𝙰𝚂𝙴 𝚆𝙰𝙸𝚃...`, event.threadID, event.messageID);
 
     const response = await axios.get(`https://hoanghao.me/api/facebook/download?url=${q}`);
     const videoUrl = response.data.data.video;
