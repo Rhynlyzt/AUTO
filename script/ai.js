@@ -4,7 +4,7 @@ module.exports.config = {
     name: "ai",
     version: "1.0.0",
     hasPermission: 0,
-    credits: "api by jerome",//api by jerome
+    credits: "Kensei",//api by jerome
     description: "Gpt architecture",
     usePrefix: false,
     commandCategory: "GPT4",
