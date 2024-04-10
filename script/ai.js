@@ -24,7 +24,7 @@ module.exports.run = async function ({ api, event, args }) {
         if (!prompt) {
             return api.sendMessage('𝚈𝙴𝚂, 𝙸𝙼 𝙰𝙻𝙸𝚅𝙴 𝙺𝙸𝙽𝙳𝙻𝚈 𝙿𝚁𝙾𝚅𝙸𝙳𝙴 𝚈𝙾𝚄𝚁 𝚀𝚄𝙴𝚂𝚃𝙸𝙾𝙽 .\n𝙴𝚇𝙰𝙼𝙿𝙻𝙴:\n 𝙰𝙸 𝚆𝙷𝙰𝚃 𝙸𝚂 𝚆𝙰𝚅𝙴', event.threadID, messageID);
         }
-        api.sendMessage('🔍 𝚂𝙴𝙰𝚁𝙲𝙷𝙸𝙽𝙶  𝙵𝙾𝚁 𝙰𝙽 𝙰𝙽𝚂𝚆𝙴𝚁 𝚃𝙾 𝚈𝙾𝚄𝚁 𝚀𝚄𝙴𝚂𝚃𝙸𝙾𝙽 𝙿𝙻𝙴𝙰𝚂𝙴 𝚆𝙰𝙸𝚃...', event.threadID);
+        api.sendMessage('🔍 𝚂𝙴𝙰𝚁𝙲𝙷𝙸𝙽𝙶 𝙵𝙾𝚁 𝙰𝙽 𝙰𝙽𝚂𝚆𝙴𝚁 𝚃𝙾 𝚈𝙾𝚄𝚁 𝚀𝚄𝙴𝚂𝚃𝙸𝙾𝙽 𝙿𝙻𝙴𝙰𝚂𝙴 𝚆𝙰𝙸𝚃...', event.threadID);
 
         // Delay
         await new Promise(resolve => setTimeout(resolve, 2000)); // Adjust the delay time as needed
