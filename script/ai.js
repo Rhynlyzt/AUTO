@@ -24,7 +24,7 @@ module.exports.handleEvent = async function ({ api, event }) {
   api.sendMessage("🗨️ | 𝙰𝚗𝚜𝚠𝚎𝚛𝚒𝚗𝚐 𝚢𝚘𝚞𝚛 𝚚𝚞𝚎𝚜𝚝𝚒𝚘𝚗, 𝙿𝚕𝚎𝚊𝚜𝚎 𝚠𝚊𝚒𝚝...", event.threadID, event.messageID);
 
   const content = args.join(" ");
-  axios.get(`https://gpt-4-upet.onrender.com/gpt?content=${encodeURIComponent(content)}`)
+  axios.get(`https://haze-gpt-api.onrender.com{encodeURIComponent(content)}`)
     .then(response => {
       if (response.data.gpt) {
         const aiResponse = formatFont(`🎓 𝐆𝐏𝐓-4 ( 𝐀𝐈 )\n\n🖋️ 𝙰𝚜𝚔: '${content}'\n\n${response.data.gpt}`);
